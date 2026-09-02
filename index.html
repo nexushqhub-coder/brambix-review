@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1B1B2F">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Brambix Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <h1>Brambix Review</h1>
+    <button id="refreshBtn" class="icon-btn" aria-label="Refresh">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"></path><path d="M1 20v-6h6"></path><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+    </button>
+  </div>
+  <p id="statusLine" class="status-line">Loading…</p>
+</header>
+
+<main id="app">
+  <div id="emptyState" class="empty-state hidden">
+    <p class="empty-title">All clear</p>
+    <p class="empty-body">Nothing needs your attention right now.</p>
+  </div>
+
+  <section id="section-cms" class="review-section hidden">
+    <h2>Character Masters <span class="count" id="count-cms"></span></h2>
+    <div class="card-list" id="list-cms"></div>
+  </section>
+
+  <section id="section-pages" class="review-section hidden">
+    <h2>Pages <span class="count" id="count-pages"></span></h2>
+    <div class="card-list" id="list-pages"></div>
+  </section>
+
+  <section id="section-scripts" class="review-section hidden">
+    <h2>Custom Scripts <span class="count" id="count-scripts"></span></h2>
+    <div class="card-list" id="list-scripts"></div>
+  </section>
+
+  <section id="section-ready" class="review-section hidden">
+    <h2>Ready to Send <span class="count" id="count-ready"></span></h2>
+    <div class="card-list" id="list-ready"></div>
+  </section>
+</main>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
