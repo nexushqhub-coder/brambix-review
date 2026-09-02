@@ -153,14 +153,31 @@ async function sendDecision(url, orderId, decision, btn) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ order_id: orderId, decision }),
     });
-    const result = await res.json();
 
-    if (result.result === 'approved') {
+    // Trust a successful HTTP status even if the body is empty or slow to
+    // arrive — n8n's response body has occasionally come back empty on
+    // slower executions even though the backend action completed correctly.
+    // See project notes: investigate intermittent empty response bodies
+    // from the auto-wire call to Workflow 2 (backlog item).
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    let result = null;
+    try {
+      const text = await res.text();
+      result = text ? JSON.parse(text) : null;
+    } catch (parseErr) {
+      // Empty or non-JSON body — treat as success since res.ok was true.
+      result = null;
+    }
+
+    if (result?.result === 'approved') {
       showToast(`Order ${orderId} approved`);
-    } else if (result.result === 'retry_allowed') {
+    } else if (result?.result === 'retry_allowed') {
       showToast(`Retry queued for ${orderId}`);
-    } else {
+    } else if (result?.result === 'escalated') {
       showToast(`Order ${orderId} escalated further`);
+    } else {
+      showToast(`Order ${orderId} updated`);
     }
 
     card.style.opacity = '0.4';
