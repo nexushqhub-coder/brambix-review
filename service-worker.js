@@ -2,7 +2,7 @@
 // Data is always fetched live from n8n, so we don't cache API responses,
 // only the static app shell for a faster reopen.
 
-const CACHE_NAME = 'brambix-review-v1';
+const CACHE_NAME = 'brambix-review-v2';
 const SHELL_FILES = ['./index.html', './style.css', './app.js', './manifest.json'];
 
 self.addEventListener('install', (event) => {
